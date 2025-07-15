@@ -1,0 +1,53 @@
+[
+  {
+    "id": 1,
+    "name": "Draft",
+    "tasks": [
+      {
+        "id": 1,
+        "columnId": 1,
+        "title": "Task 1",
+        "description": "This is a draft task.",
+        "status": "draft",
+        "createdAt": "2023-10-01T12:00:00Z"
+      },
+      {
+        "id": 2,
+        "columnId": 1,
+        "title": "Task 2",
+        "description": "This is a draft task.",
+        "status": "draft",
+        "createdAt": "2023-10-01T12:00:00Z"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "To Do",
+    "tasks": []
+  },
+  {
+    "id": 3,
+    "name": "Doing",
+    "tasks": [
+      {
+        "id": 3,
+        "columnId": 3,
+        "title": "Task 3",
+        "description": "This is a draft task.",
+        "status": "doing",
+        "createdAt": "2023-10-01T12:00:00Z"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Preview",
+    "tasks": []
+  },
+  {
+    "id": 5,
+    "name": "Done",
+    "tasks": []
+  }
+]
