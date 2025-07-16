@@ -3,11 +3,28 @@ import Board from "./components/Board.vue";
 import { useBoardColumns } from "./hooks/useBoardColumns";
 import { useUpdateTaskStatus } from "./hooks/useUpdateTaskStatus";
 import { ref } from "vue";
+import type { Task } from "./types/task";
+import ModalDetailTask from "./components/ModalDetailTask.vue";
 
 const { columns } = useBoardColumns();
 const { updateTaskStatus } = useUpdateTaskStatus();
 
 const fromColumnId = ref<number | null>(null);
+const isTaskModalOpen = ref(false);
+const selectedTask = ref<Task | null>(null);
+
+const handleOpenTaskModal = (task: Task) => {
+  selectedTask.value = task;
+  isTaskModalOpen.value = true;
+};
+
+const handleCloseTaskModal = () => {
+  isTaskModalOpen.value = false;
+
+  setTimeout(() => {
+    selectedTask.value = null;
+  }, 300);
+};
 
 const handleRemove = (event: any) => {
   const columnId = Number(event?.from?.dataset?.columnId);
@@ -41,6 +58,13 @@ const handleAdd = async (event: any, toColumnId: number) => {
       :column="column"
       @task-add="(event: any) => handleAdd(event, column.id)"
       @task-remove="handleRemove"
+      @view-task="handleOpenTaskModal"
+    />
+
+    <ModalDetailTask
+      :isOpen="isTaskModalOpen"
+      :task="selectedTask"
+      @close-modal="handleCloseTaskModal"
     />
   </div>
 </template>

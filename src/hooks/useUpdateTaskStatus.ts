@@ -1,6 +1,8 @@
 import { useStore } from "vuex";
-import type { UpdateTaskStatusPayload } from "../store/modules/board/types";
-import { BOARD_ACTIONS } from "../store/modules/board/actions";
+import {
+  BOARD_TYPES,
+  type UpdateTaskStatusPayload,
+} from "../store/modules/board/types";
 import { ref } from "vue";
 
 export const useUpdateTaskStatus = () => {
@@ -14,8 +16,7 @@ export const useUpdateTaskStatus = () => {
   }: UpdateTaskStatusPayload) => {
     try {
       loading.value = true;
-
-      await store.dispatch(BOARD_ACTIONS.UPDATE_TASK_STATUS, {
+      await store.dispatch(BOARD_TYPES.UPDATE_TASK_STATUS, {
         taskId,
         fromColumnId,
         toColumnId,

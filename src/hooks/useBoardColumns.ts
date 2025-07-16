@@ -2,7 +2,7 @@ import { useStore } from "vuex";
 import { onMounted, ref } from "vue";
 import { computed } from "vue";
 import type { Column } from "../types/column";
-import { BOARD_ACTIONS } from "../store/modules/board/actions";
+import { BOARD_TYPES } from "../store/modules/board/types";
 
 export const useBoardColumns = () => {
   const store = useStore();
@@ -12,7 +12,7 @@ export const useBoardColumns = () => {
   const fetchColumns = async () => {
     try {
       loading.value = true;
-      await store.dispatch(BOARD_ACTIONS.SET_COLUMNS);
+      await store.dispatch(BOARD_TYPES.SET_COLUMNS);
     } catch (error) {
       throw new Error("Failed to fetch columns: " + error);
     } finally {

@@ -1,18 +1,40 @@
 import type { Column } from "../../../types/column";
-import { mapColumnIdToStatus } from "../../../utils/mapColumnIdToStatus.ts";
-import type { BoardState, UpdateTaskStatusPayload } from "./types";
-
-export const BOARD_MUTATIONS = {
-  SET_COLUMNS: "SET_COLUMNS",
-  UPDATE_TASK_STATUS: "UPDATE_TASK_STATUS",
-};
+import { mapColumnIdToStatus } from "../../../utils/mapColumnIdToStatus";
+import {
+  BOARD_TYPES,
+  type AddNewTaskPayload,
+  type BoardState,
+  type DeleteTaskPayload,
+  type UpdateTaskStatusPayload,
+} from "./types";
 
 export default {
-  [BOARD_MUTATIONS.SET_COLUMNS](state: BoardState, payload: Column[]) {
+  [BOARD_TYPES.SET_COLUMNS](state: BoardState, payload: Column[]) {
     state.columns = payload;
   },
 
-  [BOARD_MUTATIONS.UPDATE_TASK_STATUS](
+  [BOARD_TYPES.ADD_NEW_TASK](state: BoardState, payload: AddNewTaskPayload) {
+    const columnIndex = state.columns.findIndex(
+      (column) => column.id === payload.columnId
+    );
+    state.columns[columnIndex].tasks.push(payload.task);
+  },
+
+  [BOARD_TYPES.DELETE_TASK](state: BoardState, payload: DeleteTaskPayload) {
+    const columnIndex = state.columns.findIndex(
+      (column) => column.id === payload.columnId
+    );
+    if (columnIndex === -1) return;
+
+    const tasks = state.columns[columnIndex].tasks;
+    const taskIndex = tasks.findIndex((task) => task.id === payload.taskId);
+
+    if (taskIndex === -1) return;
+
+    tasks.splice(taskIndex, 1);
+  },
+
+  [BOARD_TYPES.UPDATE_TASK_STATUS](
     state: BoardState,
     payload: UpdateTaskStatusPayload
   ) {
@@ -26,6 +48,7 @@ export default {
     const taskIndex = tasksOfToColumn.findIndex(
       (task) => task.id === payload.taskId
     );
+
     if (taskIndex === -1) return;
 
     const updatedTask = {
@@ -34,7 +57,6 @@ export default {
       status: mapColumnIdToStatus(payload.toColumnId),
     };
 
-    console.log(updatedTask);
     tasksOfToColumn.push(updatedTask);
   },
 };

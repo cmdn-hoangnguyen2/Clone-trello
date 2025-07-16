@@ -1,8 +1,6 @@
 import { TASK_STATUS } from "../types/task";
 
 export const mapColumnIdToStatus = (columnId: number) => {
-  console.log("mapColumnIdToStatus", columnId);
-
   const columnStatusMap = () => {
     switch (columnId) {
       case 1:
