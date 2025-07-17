@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { BUTTON_VARIANT } from "../constants/button";
+import { COLOR } from "../constants/color";
 import { useDeleteTask } from "../hooks/useDeleteTask";
 import type { Task } from "../types/task";
+import BaseButton from "./BaseButton.vue";
 import BaseModal from "./BaseModal.vue";
-import ButtonIcon from "./ButtonIcon.vue";
 
 const props = defineProps<{
   isOpen: boolean;
@@ -45,10 +47,11 @@ const handleDeleteTask = () => {
       </div>
 
       <div class="col-span-3 flex flex-col gap-2 p-3">
-        <ButtonIcon
+        <BaseButton
           label="Delete"
           icon="trash"
-          class="text-white bg-red-400"
+          :variant="BUTTON_VARIANT.BUTTON_ICON"
+          :color="COLOR.DANGER"
           @on-click="handleDeleteTask"
         />
       </div>

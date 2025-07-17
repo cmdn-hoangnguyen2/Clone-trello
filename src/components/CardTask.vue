@@ -14,7 +14,7 @@ const handleViewDetail = () => {
 
 <template>
   <BaseCard @click="handleViewDetail">
-    <p class="font-semibold text-gray-800">
+    <p class="card-title font-semibold text-gray-800">
       {{ task.title }}
     </p>
   </BaseCard>

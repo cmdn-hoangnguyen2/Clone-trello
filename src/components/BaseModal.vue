@@ -15,11 +15,11 @@ const handleCloseModal = () => {
 <template>
   <Teleport to="body">
     <div
-      class="absolute inset-0 w-screen h-screen flex justify-center items-center"
+      class="modal absolute inset-0 w-screen h-screen flex justify-center items-center"
       v-if="isOpen"
     >
       <div
-        class="absolute inset-0 bg-black opacity-10"
+        class="modal-shadow-bg absolute inset-0 bg-black opacity-10"
         v-show="isShadowBackground"
         @click="handleCloseModal"
       ></div>

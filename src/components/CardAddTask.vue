@@ -3,14 +3,14 @@ import { ref } from "vue";
 import BaseCard from "./BaseCard.vue";
 
 defineProps<{}>();
-const emit = defineEmits(["submitNewTask"]);
+const emit = defineEmits(["submit-add-task"]);
 
 const title = ref("");
 
 const handleSubmit = () => {
   if (!title.value.trim()) return;
 
-  emit("submitNewTask", title.value.trim());
+  emit("submit-add-task", title.value.trim());
   title.value = "";
 };
 </script>
@@ -18,9 +18,18 @@ const handleSubmit = () => {
 <template>
   <BaseCard>
     <div class="flex justify-between items-center">
-      <input v-model="title" type="text" placeholder="Enter task title" />
+      <input
+        class="input-add-new-task"
+        v-model="title"
+        type="text"
+        placeholder="Enter task title"
+      />
 
-      <button type="submit" @click="handleSubmit">
+      <button
+        class="button button-add-new-task"
+        type="submit"
+        @click="handleSubmit"
+      >
         <i class="pi pi-check"></i>
       </button>
     </div>

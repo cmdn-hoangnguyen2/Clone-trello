@@ -48,14 +48,15 @@ const handleViewTask = (task: Task) => {
 
 <template>
   <div
-    class="col-span-1 bg-white rounded-xl shadow-md w-full p-4 flex flex-col"
+    class="board col-span-1 bg-white rounded-xl shadow-md w-full p-4 flex flex-col"
   >
-    <div class="flex justify-between items-center mb-4">
-      <h2 class="text-lg font-semibold text-gray-800">
+    <div class="board-header flex justify-between items-center mb-4">
+      <h2 class="board-title text-lg font-semibold text-gray-800">
         {{ column.name }}
       </h2>
 
       <button
+        class="button-show-card-new-task"
         type="button"
         @click="onProcessingNewTask"
         :isDisable="isAddingTask"
@@ -64,10 +65,10 @@ const handleViewTask = (task: Task) => {
       </button>
     </div>
     <div class="h-full flex flex-col gap-2">
-      <CardAddTask v-show="isAddingTask" @submitNewTask="onSubmitNewTask" />
+      <CardAddTask v-show="isAddingTask" @submit-add-task="onSubmitNewTask" />
 
       <draggableComponent
-        class="h-full flex flex-col gap-2"
+        class="draggable-component h-full flex flex-col gap-2"
         item-key="id"
         group="tasks"
         :list="column.tasks"
@@ -77,15 +78,18 @@ const handleViewTask = (task: Task) => {
         @remove="emit('task-remove', $event)"
       >
         <template #item="{ element }">
-          <CardTask :task="element" @viewDetail="handleViewTask" />
-        </template>
-
-        <template>
-          <div v-if="!column.tasks.length" class="text-sm text-gray-400 italic">
-            No tasks
-          </div>
+          <CardTask :task="element" @view-detail="handleViewTask" />
         </template>
       </draggableComponent>
+
+      <template>
+        <div
+          class="board-empty-column-text text-sm text-gray-400 italic"
+          v-if="!column.tasks.length"
+        >
+          No tasks
+        </div>
+      </template>
     </div>
   </div>
 </template>

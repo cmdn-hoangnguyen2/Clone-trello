@@ -18,9 +18,11 @@
     "vuex": "^4.1.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.3",
     "@vitejs/plugin-vue": "^6.0.0",
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.7.0",
+    "jsdom": "^26.1.0",
     "typescript": "~5.8.3",
     "vite": "^7.0.4",
     "vitest": "^3.2.4",

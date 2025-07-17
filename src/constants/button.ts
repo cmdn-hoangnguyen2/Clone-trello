@@ -1,0 +1,3 @@
+export enum BUTTON_VARIANT {
+  BUTTON_ICON = "BUTTON_ICON",
+}
